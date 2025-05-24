@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>HACKERVERSE COMMAND CENTER</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+
+    <h1><i class="fas fa-terminal"></i> HACKERVERSE COMMAND CENTER <i class="fas fa-satellite-dish"></i></h1>
+
+    <div class="container">
+        <h2><i class="fas fa-paper-plane"></i> INITIATE BROADCAST / TARGET</h2>
+        <input type="text" id="targetId" placeholder="CHANNEL_ID (@channel) || USER_ID (123456789)" />
+        <textarea id="message" rows="7" placeholder="Input payload. For automated sequence, include a 4-digit period string (e.g., 'CODE: 0123'). Output data (Result & Accuracy) will be randomized."></textarea>
+        <button onclick="sendManualMessage()"><i class="fas fa-feather-alt"></i> EXECUTE MANUAL PAYLOAD</button>
+        <button id="toggleAutomationButton" onclick="toggleAutomation()"><i class="fas fa-robot"></i> ACTIVATE AUTONOMOUS SEQUENCE</button>
+        <p class="note"><b>SYSTEM NOTE:</b> Use <b>@channelname</b> for channel broadcasts or numerical ID for direct user targeting. Automated sequences deploy payloads every <b>60 seconds</b>. Ensure bot has admin permissions in target channel or established secure link with user.</p>
+    </div>
+
+    <div class="container">
+        <h2><i class="fas fa-burn"></i> DEPLOY EMOTICON PACKS</h2>
+        <p class="note">Emoticon packs will be transmitted to the currently defined target ID.</p>
+        <div class="sticker-buttons">
+            <button onclick="sendSticker('CAACAgUAAxkBAAEBRz9oJYTGDQENiTOJgBzPPUEjBMbeFQACLBAAAm1SQFUM-uASNVLKVzYE')"><i class="fas fa-check-circle"></i> WIN CONFIRMATION</button>
+            <button onclick="sendSticker('CAACAgUAAxkBAAEBSvtoLhpi1T23ILyJh5GnuK0-saXVJwACihMAAmg3MVZLVgG9oQSZODYE')"><i class="fas fa-times-circle"></i> LOSS NOTIFICATION</button>
+            <button onclick="sendSticker('CAACAgUAAxkBAAEBSyVoLiqiOJf7AUw66ApaxfmkAfo08QACGBEAAgzB0VfHU7cnfvqVRTYE')"><i class="fas fa-play-circle"></i> SESSION INITIATED</button>
+            <button onclick="sendSticker('CAACAgUAAxkBAAEBSyhoLiqkboPvQDYDu1b1TatS_cspTAACkBIAAnoF2Ff6Bg3_njzCKTYE')"><i class="fas fa-stop-circle"></i> SESSION TERMINATED</button>
+        </div>
+        <p class="note"><b>DATA ACQUISITION TIP:</b> Intercept and forward any desired emoticon to <a href="https://t.me/JsonDumpBot" target="_blank" style="color: var(--accent-color-1); text-decoration: none; font-weight: 600; text-shadow: 0 0 5px rgba(0,247,210,0.7);">@JsonDumpBot</a> for its unique ID string.</p>
+    </div>
+
+    <div class="watermark">POWERED BY X HACKER</div>
+
+    <div id="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

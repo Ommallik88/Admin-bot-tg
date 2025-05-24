@@ -1,0 +1,471 @@
+/* CSS Variables for easier customization */
+:root {
+    --primary-bg: #070707;
+    --secondary-bg: #151515;
+    --container-bg: rgba(15, 15, 15, 0.9);
+    --accent-color-1: #00f7d2;
+    --accent-color-1-rgb: 0, 247, 210; /* Added for RGBA use */
+    --accent-color-2: #ff0099;
+    --accent-color-2-rgb: 255, 0, 153; /* Added for RGBA use */
+    --text-color-light: #e0e0e0;
+    --text-color-dark: #b0b0b0;
+    --input-bg: #1f1f1f;
+    --input-border: #00f7d24d;
+    --button-glow: rgba(0, 247, 210, 0.6);
+    --stop-button-glow: rgba(255, 0, 153, 0.6);
+    --shadow-intensity: 0.6;
+
+    /* Toast specific colors */
+    --toast-success-bg: rgba(0, 247, 210, 0.15);
+    --toast-success-border: #00f7d2;
+    --toast-error-bg: rgba(255, 0, 153, 0.15);
+    --toast-error-border: #ff0099;
+    --toast-info-bg: rgba(0, 170, 255, 0.15);
+    --toast-info-border: #00aaff;
+    --toast-text: #e0e0e0;
+    --toast-progress-bar-height: 4px; /* Height of the progress bar */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(145deg, var(--primary-bg), var(--secondary-bg));
+    color: var(--text-color-light);
+    font-family: 'Share Tech Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Animated Grid Overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(to right, rgba(0, 247, 210, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 247, 210, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -1;
+    opacity: 0.3;
+    animation: gridScroll 30s linear infinite;
+}
+
+@keyframes gridScroll {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 50px 50px;
+    }
+}
+
+/* Background animated glowing circles */
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: 0 0 40px var(--accent-color-1), 0 0 80px var(--accent-color-1);
+    animation: glowingCircles 18s infinite alternate ease-in-out;
+    filter: blur(15px);
+    z-index: 0;
+}
+
+.circle:nth-child(1) {
+    width: 200px;
+    height: 200px;
+    top: 10%;
+    left: -10%;
+    animation-duration: 20s;
+}
+
+.circle:nth-child(2) {
+    width: 280px;
+    height: 280px;
+    bottom: 5%;
+    right: -15%;
+    animation-duration: 22s;
+    animation-delay: 3s;
+    box-shadow: 0 0 50px var(--accent-color-2), 0 0 100px var(--accent-color-2);
+}
+
+.circle:nth-child(3) {
+    width: 150px;
+    height: 150px;
+    top: 40%;
+    right: 5%;
+    animation-duration: 17s;
+    animation-delay: 1s;
+}
+
+@keyframes glowingCircles {
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translate(40px, 40px) scale(1.1) rotate(180deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(0, 0) scale(1) rotate(360deg);
+        opacity: 0.6;
+    }
+}
+
+
+h1 {
+    margin-bottom: 50px;
+    color: var(--accent-color-1);
+    font-weight: 700;
+    font-size: 44px;
+    text-shadow: 0 0 25px var(--accent-color-1), 0 0 50px rgba(0, 247, 210, 0.4);
+    letter-spacing: 4px;
+    font-family: 'Bebas Neue', sans-serif;
+    text-align: center;
+    line-height: 1.2;
+    z-index: 1;
+    animation: textGlow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+    from {
+        text-shadow: 0 0 15px var(--accent-color-1);
+    }
+    to {
+        text-shadow: 0 0 30px var(--accent-color-1), 0 0 50px rgba(0, 247, 210, 0.4);
+    }
+}
+
+.container {
+    width: 100%;
+    max-width: 650px;
+    background: var(--container-bg);
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid var(--input-border);
+    box-shadow: 0 0 35px rgba(0, 247, 210, var(--shadow-intensity)), 0 0 70px rgba(0, 247, 210, calc(var(--shadow-intensity) / 2));
+    margin-bottom: 40px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 1;
+    animation: containerFadeIn 0.8s ease-out forwards;
+    overflow: hidden;
+}
+
+@keyframes containerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+h2 {
+    color: var(--accent-color-1);
+    font-weight: 600;
+    font-size: 28px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--accent-color-1);
+    padding-bottom: 15px;
+    font-family: 'Bebas Neue', sans-serif;
+    text-shadow: 0 0 10px var(--accent-color-1);
+}
+
+input,
+textarea {
+    width: calc(100% - 30px);
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    font-size: 16px;
+    background: var(--input-bg);
+    color: var(--text-color-light);
+    outline: none;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.7);
+    transition: all 0.3s ease;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+input:focus,
+textarea:focus {
+    background: #2a2a2a;
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.9), 0 0 15px var(--accent-color-1);
+    border-color: var(--accent-color-1);
+}
+
+button {
+    width: 100%;
+    padding: 18px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: linear-gradient(45deg, var(--accent-color-1), #00aaff);
+    color: var(--primary-bg);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    margin-top: 15px;
+    box-shadow: 0 6px 20px var(--button-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1.5px;
+}
+
+button i {
+    margin-right: 12px;
+    font-size: 22px;
+}
+
+button:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 30px var(--button-glow), 0 0 40px var(--button-glow);
+    background: linear-gradient(45deg, #00e0b8, #0099ee);
+}
+
+button.stop-button {
+    background: linear-gradient(45deg, var(--accent-color-2), #ff4757);
+    box-shadow: 0 6px 20px var(--stop-button-glow);
+    color: #f0f0f0;
+}
+
+button.stop-button:hover {
+    background: linear-gradient(45deg, #e60088, #e63646);
+    box-shadow: 0 10px 30px var(--stop-button-glow), 0 0 40px var(--stop-button-glow);
+}
+
+.note {
+    font-size: 14px;
+    color: var(--text-color-dark);
+    margin-top: 18px;
+    line-height: 1.6;
+    padding: 10px 15px;
+    background: rgba(0, 247, 210, 0.05);
+    border-left: 4px solid var(--accent-color-1);
+    border-radius: 5px;
+}
+
+.note b {
+    color: var(--accent-color-1);
+    text-shadow: 0 0 5px rgba(0, 247, 210, 0.5);
+}
+
+.sticker-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.sticker-buttons button {
+    margin-top: 0;
+    padding: 15px;
+    font-size: 16px;
+    background: linear-gradient(45deg, #333333, #1c1c1c);
+    color: var(--text-color-light);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    border: 1px solid #3a3a3a;
+    text-transform: none;
+    letter-spacing: normal;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.sticker-buttons button:hover {
+    background: linear-gradient(45deg, #4a4a4a, #2c2c2c);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
+    transform: translateY(-3px);
+}
+
+.watermark {
+    position: fixed;
+    bottom: 25px;
+    right: 30px;
+    font-size: 16px;
+    color: var(--accent-color-1);
+    opacity: 0.9;
+    user-select: none;
+    font-weight: 600;
+    text-shadow: 0 0 10px var(--accent-color-1);
+    z-index: 0;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+}
+
+/* --- TOAST NOTIFICATION SYSTEM --- */
+#toast-container {
+    position: fixed;
+    top: 30px; /* Move toasts to the top */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 1000;
+    width: 90%;
+    max-width: 450px; /* Slightly wider */
+    pointer-events: none;
+    padding: 0 15px; /* Add some horizontal padding */
+}
+
+.toast {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)); /* Darker background with gradient */
+    border: 1px solid rgba(var(--accent-color-1-rgb), 0.4); /* Use RGB for opacity control */
+    color: var(--text-color-light);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 247, 210, 0.2),
+                0 0 15px rgba(0, 247, 210, 0.1);
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* Icon, message, close button */
+    align-items: center;
+    gap: 15px;
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95); /* Start from slightly above */
+    animation: toastEnter 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; /* Springy entry */
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 15px;
+    line-height: 1.5;
+    pointer-events: all;
+    position: relative;
+    overflow: hidden;
+
+    /* Custom properties for JS-controlled animations */
+    animation-duration: var(--toast-duration, 4s), var(--exit-duration, 0.5s);
+    animation-delay: 0s, var(--toast-duration, 4s); /* Exit animation starts after content duration */
+    animation-fill-mode: forwards;
+}
+
+/* Base animation for all toasts */
+@keyframes toastEnter {
+    0% { opacity: 0; transform: translateY(-30px) scale(0.95); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.toast.exiting {
+    animation: toastExit var(--exit-duration, 0.5s) ease-in forwards;
+}
+
+@keyframes toastExit {
+    to { opacity: 0; transform: translateY(-20px) scale(0.9); }
+}
+
+.toast.success {
+    border-color: rgba(0, 247, 210, 0.7);
+    box-shadow: 0 8px 25px rgba(0, 247, 210, 0.3),
+                0 0 20px rgba(0, 247, 210, 0.2);
+}
+
+.toast.error {
+    border-color: rgba(255, 0, 153, 0.7);
+    box-shadow: 0 8px 25px rgba(255, 0, 153, 0.3),
+                0 0 20px rgba(255, 0, 153, 0.2);
+    animation-name: toastEnter, toastShake; /* Shake only on error */
+    animation-iteration-count: 1, 2;
+    animation-delay: 0s, 0.5s;
+}
+
+@keyframes toastShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+}
+
+.toast.info {
+    border-color: rgba(0, 170, 255, 0.7);
+    box-shadow: 0 8px 25px rgba(0, 170, 255, 0.3),
+                0 0 20px rgba(0, 170, 255, 0.2);
+}
+
+.toast i.icon {
+    font-size: 24px;
+    color: var(--accent-color-1);
+    text-shadow: 0 0 8px var(--accent-color-1);
+    flex-shrink: 0;
+}
+
+.toast.success i.icon {
+    color: var(--toast-success-border);
+    text-shadow: 0 0 8px var(--toast-success-border);
+}
+
+.toast.error i.icon {
+    color: var(--toast-error-border);
+    text-shadow: 0 0 8px var(--toast-error-border);
+}
+
+.toast.info i.icon {
+    color: var(--toast-info-border);
+    text-shadow: 0 0 8px var(--toast-info-border);
+}
+
+.toast .message {
+    flex-grow: 1;
+}
+
+.toast .close-button {
+    background: none;
+    border: none;
+    color: var(--text-color-dark);
+    font-size: 18px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease-in-out;
+    padding: 0;
+    margin-left: 10px;
+    line-height: 1; /* Adjust to better align the 'x' */
+}
+
+.toast .close-button:hover {
+    opacity: 1;
+    color: var(--text-color-light);
+}
+
+/* Progress Bar (using ::before for a more integrated look) */
+.toast::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: var(--toast-progress-bar-height);
+    background: linear-gradient(90deg, var(--accent-color-1), transparent); /* Default for info */
+    width: 100%;
+    border-radius: 0 0 12px 12px;
+    transform-origin: left center;
+    animation: progressBarShrink linear;
+    animation-fill-mode: forwards;
+    animation-duration: var(--toast-duration, 4s); /* Controlled by JS duration */
+}
+
+.toast.success::before {
+    background: linear-gradient(90deg, var(--toast-success-border), transparent);
+}
+
+.toast.error::before {
+    background: linear-gradient(90deg, var(--toast-error-border), transparent);
+}
+
+.toast.info::before {
+    background: linear-gradient(90deg, var(--toast-info-border), transparent);
+}
+
+@keyframes progressBarShrink {
+    0% { width: 100%; }
+    100% { width: 0%; }
+}
